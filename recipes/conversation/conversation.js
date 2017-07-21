@@ -64,6 +64,7 @@ var iswaving = false ;
 var Gpio = pigpio.Gpio;
 var motor = new Gpio(7, {mode: Gpio.OUTPUT});
 var interval = 700;
+var sleep = require('sleep');
 console.log("outputting ", JSON.stringify(config1, null, 4));
 
 //setting the log level to trace. By default its 'warn'
@@ -74,6 +75,8 @@ deviceClient.connect();
 
 // instantiate our TJBot!
 var tj = new TJBot(hardware, tjConfig, credentials);
+var actionNN = 1;
+movePlease = false;
 
 console.log("You can ask me to introduce myself or tell you a joke.");
 console.log("Try saying, \"" + tj.configuration.robot.name + ", please introduce yourself\" or \"" + tj.configuration.robot.name + ", who are you?\"");
@@ -93,6 +96,19 @@ var speak = function(text_to_speak) {
 };
 
 var dance = function(tjj) {
+	while(process.env.movePlease == 'true'){
+		if(actionNN % 2 ==0){
+			tjj.raiseArm();
+			actionNN++;
+		} else {
+			tjj.lowerArm();
+			actionNN++;
+		}
+		sleep.msleep(500);
+		if(process.env.movePlease == 'false'){
+			break;
+		}
+	};
 };
 
 deviceClient.on('connect', function() {
@@ -139,6 +155,13 @@ deviceClient.on("command", function(commandName, format, payload, topic) {
                 console.log('exec error: ' + error);
             }
         });
+	process.env["movePlease"] = 'true';
+	actionNN = 1;
+	dance(tj);
+	setInterval(function function_name () {
+	    process.env["movePlease"] = 'false';
+	    actionNN = 1;
+	},5000);
     }  
 });
 

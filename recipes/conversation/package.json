@@ -11,6 +11,7 @@
     "fs": "0.0.1-security",
     "ibmiotf": "^0.2.38",
     "mmm-gpio": "^3.0.2",
+    "sleep": "^5.1.1",
     "sonic": "^0.2.3",
     "tjbot": "latest",
     "watson-developer-cloud": "^2.34.0"
