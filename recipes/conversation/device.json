@@ -1,0 +1,12 @@
+{
+        "org": "uhzclw",
+        "domain": "internetofthings.ibmcloud.com",
+        "type": "tjbot-stark",
+        "id": "b827ebc1e6f8",
+        "auth-method": "token",
+        "auth-token": "uTX+0135nmztXExG-Y",
+        "use-client-certs": false,
+	"TTSUsername":"07ca25be-ca5b-4a96-9b22-f62e89e67c2d",
+	"TTSPassword":"K4tiVfeSDwsS",
+	"voice":"en-US_LisaVoice"
+}
